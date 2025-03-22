@@ -1,0 +1,47 @@
+{% include "header.html" %}
+
+<!-- Page Header -->
+<header class="masthead" style="background-image: url('../static/assets/img/Background.jpg')">
+  <div class="container position-relative px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+      <div class="col-md-10 col-lg-8 col-xl-7">
+        <div class="site-heading">
+          <h1>Weather Information</h1>
+          <span class="subheading">Get the latest weather updates for your destination</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Main Content -->
+<div class="container px-4 px-lg-5">
+  <div class="row gx-4 gx-lg-5 justify-content-center">
+    <div class="col-md-10 col-lg-8 col-xl-7">
+      
+      <!-- Weather Form -->
+      <div class="weather-form">
+        <h2>Enter a City to Check Weather</h2>
+        <form action="/weather" method="POST">
+          <input type="text" name="city" placeholder="Enter city" required>
+          <button type="submit">Check Weather</button>
+        </form>
+      </div>
+
+      <!-- Weather Results -->
+      {% if weather %}
+        <div class="weather-result mt-4">
+          {% if weather.error %}
+            <p class="text-danger">{{ weather.error }}</p>
+          {% else %}
+            <h3>Weather in {{ weather.city }}:</h3>
+            <p><strong>Temperature:</strong> {{ (weather.temperature - 273.15) | round(2) }}°C</p> <!-- Convert from Kelvin to Celsius -->
+            <p><strong>Condition:</strong> {{ weather.condition }}</p>
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% include "footer.html" %}

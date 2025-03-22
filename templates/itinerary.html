@@ -1,0 +1,46 @@
+{% include "header.html" %}
+
+<!-- Page Header -->
+<header class="masthead" style="background-image: url('../static/assets/img/Background.jpg')">
+  <div class="container position-relative px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+      <div class="col-md-10 col-lg-8 col-xl-7">
+        <div class="site-heading">
+          <h1>Itinerary for Your Trip</h1>
+          <span class="subheading">Personalized travel plans to make your trip unforgettable</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Main Content -->
+<div class="container px-4 px-lg-5">
+  <div class="row gx-4 gx-lg-5 justify-content-center">
+    <div class="col-md-10 col-lg-8 col-xl-7">
+      
+      <!-- Itinerary Form -->
+      <div class="itinerary-form">
+        <h2>Enter a City to Get Your Itinerary</h2>
+        <form action="/itinerary" method="POST">
+          <input type="text" name="city" placeholder="Enter city for itinerary" required>
+          <button type="submit">Get Itinerary</button>
+        </form>
+      </div>
+
+      <!-- Itinerary Results -->
+      {% if city %}
+        <div class="itinerary-result mt-4">
+          <h3>Itinerary for {{ city }}:</h3>
+          <ul>
+            {% for day in plan %}
+              <li>{{ day }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% include "footer.html" %}

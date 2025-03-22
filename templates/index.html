@@ -1,0 +1,63 @@
+{% include "header.html" %}
+
+<!-- Page Header -->
+<header class="masthead" style="background-image: url('../static/assets/img/Background.jpg')">
+  <div class="container position-relative px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+      <div class="col-md-10 col-lg-8 col-xl-7">
+        <div class="site-heading">
+          <h1>AI Travel Agent: Your Personalized Travel Companion</h1>
+          <span class="subheading">Leveraging Artificial Intelligence to Revolutionize Travel Planning and Booking</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Main Content -->
+<div class="container px-4 px-lg-5">
+  <div class="row gx-4 gx-lg-5 justify-content-center">
+    <div class="col-md-10 col-lg-8 col-xl-7">
+      
+      <!-- Weather Section -->
+      <div class="weather-section">
+        <h2>Get Current Weather</h2>
+        <form action="/weather" method="POST">
+          <input type="text" name="city" placeholder="Enter city" required>
+          <button type="submit">Check Weather</button>
+        </form>
+        {% if weather %}
+          <div class="weather-result">
+            {% if weather.error %}
+              <p>{{ weather.error }}</p>
+            {% else %}
+              <p>City: {{ weather.city }}</p>
+              <p>Temperature: {{ weather.temperature }}°C</p>
+              <p>Condition: {{ weather.condition }}</p>
+            {% endif %}
+          </div>
+        {% endif %}
+      </div>
+
+      <!-- Itinerary Section -->
+      <div class="itinerary-section mt-5">
+        <h2>Plan Your Trip</h2>
+        <form action="/itinerary" method="POST">
+          <input type="text" name="city" placeholder="Enter city for itinerary" required>
+          <button type="submit">Get Itinerary</button>
+        </form>
+        {% if city %}
+          <h3>Itinerary for {{ city }}:</h3>
+          <ul>
+            {% for day in plan %}
+              <li>{{ day }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+
+    </div>
+  </div>
+</div>
+
+{% include "footer.html" %}
