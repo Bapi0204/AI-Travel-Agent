@@ -19,9 +19,10 @@ from forms import CreatePostForm,CreateLoginForm,CreateRegisterForm,CommentForm
 
 
 # Use the variables in your app
+app = Flask(__name__)
 SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL")
 SECRET_KEY = os.getenv("SECRET_KEY")
-app = Flask(__name__)
+
 app.config['SECRET_KEY'] = SECRET_KEY
 Bootstrap5(app)
 
